@@ -22,6 +22,10 @@ Once the module is enabled, it will automatically replace the first occurrence o
 
 If you would like to contribute to the development of this module, please fork the repository and submit a pull request. We welcome all contributions!
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ## Support
 
 If you encounter any issues or have any questions, please open an issue on the [GitHub repository](https://github.com/joaquinpereyra98/Roll2d125e) or contact us at [support email](joaquinpereyra98@gmail.com).
