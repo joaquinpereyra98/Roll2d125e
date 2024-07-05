@@ -1,8 +1,8 @@
-import { Roll2d125e } from './src/2d12-roll.mjs';
+import { default as Roll2d125e } from './src/2d12-roll.mjs';
 
-Hook.on("init", () =>{
+Hooks.on("init", () =>{
     game.Roll2d125e = {dice: {Roll2d125e}};
-    
+
     // Record Configuration Values over the System Record
     CONFIG.Dice.D20Roll = Roll2d125e;
     
