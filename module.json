@@ -16,8 +16,8 @@
         }
     ],
     "url": "https://github.com/joaquinpereyra98/Roll2d125e",
-    "download": "",
-    "manifest": "",
+    "download": "https://github.com/joaquinpereyra98/nullgame/releases/download/v1.0.0/module.zip",
+    "manifest": "https://raw.githubusercontent.com/joaquinpereyra98/Roll2d125e/releases/latest/download/module.json",
     "readme": "README.md",
     "relationships": {
         "systems": [
