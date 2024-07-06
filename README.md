@@ -9,6 +9,14 @@ This module is for FoundryVTT and modifies the standard 1d20 roll in Dungeons & 
 
 ## Installation
 
+### Manifest
+1. Open FoundryVTT and navigate to the **Add-on Modules** tab.
+2. Click on the **Install Module** button.
+3. Scroll down to the **Manifest URL** box at the bottom of the window.
+4. Copy and paste the following URL into the **Manifest URL** box: `https://raw.githubusercontent.com/joaquinpereyra98/Roll2d125e/releases/latest/download/module.json`.
+5. Click the **Install** button to begin the installation process.
+   
+### Manual
 1. Download the module.zip from the [releases page](https://github.com/joaquinpereyra98/Roll2d125e/releases).
 2. Extract the downloaded file on a folder called: `Roll2d125e`.
 3. Place Roll2d125e folder in your FoundryVTT `modules` directory.
