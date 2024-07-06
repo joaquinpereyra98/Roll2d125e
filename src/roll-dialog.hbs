@@ -1,0 +1,68 @@
+<form>
+    {{#each formulas}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.Formula" }} {{#if type}}({{type}}){{/if}}</label>
+        <input type="text" name="formula" value="{{formula}}" disabled>
+    </div>
+    {{/each}}
+    {{#if chooseModifier}}
+    <div class="form-group">
+        <label>{{ localize "DND5E.AbilityModifier" }}</label>
+        <select name="ability">
+            {{selectOptions abilities selected=defaultAbility labelAttr="label"}}
+        </select>
+    </div>
+    {{/if}}
+    <div class="flexrow">
+        <fieldset>
+            <legend>Disadvantage:</legend>
+            <div>
+                <input type="radio" name="disadvantage" value="" checked />
+                <label for="huey">0</label>
+            </div>
+            <div>
+                <input type="radio" name="disadvantage" value="1" />
+                <label for="huey">-1</label>
+            </div>
+            <div>
+                <input type="radio" name="disadvantage" value="2" />
+                <label for="dewey">-2</label>
+            </div>
+            <div>
+                <input type="radio" name="disadvantage" value="3" />
+                <label for="louie">-3</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Advantage:</legend>
+            <div>
+                <input type="radio" name="advantage" value="" checked />
+                <label for="huey">0</label>
+            </div>
+            <div>
+                <input type="radio" name="advantage" value="1" />
+                <label for="huey">+1</label>
+            </div>
+            <div>
+                <input type="radio" name="advantage" value="2" />
+                <label for="dewey">+2</label>
+            </div>
+            <div>
+                <input type="radio" name="advantage" value="3" />
+                <label for="louie">+3</label>
+            </div>
+
+        </fieldset>
+    </div>
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.RollSituationalBonus" }}</label>
+        <input type="text" name="bonus" value="" placeholder="{{ localize 'DND5E.RollExample' }}" />
+    </div>
+    <div class="form-group">
+        <label>{{ localize "DND5E.RollMode" }}</label>
+        <select name="rollMode">
+            {{selectOptions rollModes selected=defaultRollMode localize=true}}
+        </select>
+    </div>
+</form>
