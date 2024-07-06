@@ -31,9 +31,8 @@ export default class Roll2d125e extends dnd5e.dice.D20Roll {
     }
 
     // Assign critical and fumble thresholds
-    const { Roll2d125e } = this.data.flags;
-    const critical = Math.floor(Roll2d125e.critical ?? 22);
-    const fumble = Math.floor(Roll2d125e.fumble ?? 4);
+    const critical = Math.floor(this.data.flags?.Roll2d125e?.critical) || 22;
+    const fumble = Math.floor(this.data.flags?.Roll2d125e?.fumble) || 4;
 
     d20.options.critical = this.options.critical = critical;
     d20.options.fumble = this.options.fumble = fumble;
@@ -62,7 +61,8 @@ export default class Roll2d125e extends dnd5e.dice.D20Roll {
     } = {},
     options = {}
   ) {
-    const { Roll2d125e } = this.data.flags;
+    const critical = Math.floor(this.data.flags?.Roll2d125e?.critical) || 22;
+    const fumble = Math.floor(this.data.flags?.Roll2d125e?.fumble) || 4;
     // Render the Dialog inner HTML
     const content = await renderTemplate(
       template ?? this.constructor.EVALUATION_TEMPLATE,
@@ -73,8 +73,8 @@ export default class Roll2d125e extends dnd5e.dice.D20Roll {
         chooseModifier,
         defaultAbility,
         abilities: CONFIG.DND5E.abilities,
-        critical: `${Math.floor(Roll2d125e.critical ?? 22)}`,
-        fumble: `${Math.floor(Roll2d125e.fumble ?? 4)}`,
+        critical: `${critical}`,
+        fumble: `${fumble}`,
       }
     );
 
