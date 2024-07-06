@@ -31,12 +31,13 @@ export default class Roll2d125e extends dnd5e.dice.D20Roll {
     }
 
     // Assign critical and fumble thresholds
-    if (this.options.critical === 20) {
-      d20.options.critical = 22;
-    }
-    if (this.options.fumble === 1) {
-      d20.options.fumble = 2;
-    }
+    const { Roll2d125e } = this.data.flags;
+    const critical = Math.floor(Roll2d125e.critical ?? 22);
+    const fumble = Math.floor(Roll2d125e.fumble ?? 4);
+
+    d20.options.critical = this.options.critical = critical;
+    d20.options.fumble = this.options.fumble = fumble;
+
     if (this.options.targetValue) {
       d20.options.target = this.options.targetValue;
     }
@@ -50,21 +51,69 @@ export default class Roll2d125e extends dnd5e.dice.D20Roll {
 
   static EVALUATION_TEMPLATE = "modules/Roll2d125e/src/roll-dialog.hbs";
 
+  async configureDialog(
+    {
+      title,
+      defaultRollMode,
+      defaultAction = D20Roll.ADV_MODE.NORMAL,
+      chooseModifier = false,
+      defaultAbility,
+      template,
+    } = {},
+    options = {}
+  ) {
+    const { Roll2d125e } = this.data.flags;
+    // Render the Dialog inner HTML
+    const content = await renderTemplate(
+      template ?? this.constructor.EVALUATION_TEMPLATE,
+      {
+        formulas: [{ formula: `${this.formula} + @bonus` }],
+        defaultRollMode,
+        rollModes: CONFIG.Dice.rollModes,
+        chooseModifier,
+        defaultAbility,
+        abilities: CONFIG.DND5E.abilities,
+        critical: `${Math.floor(Roll2d125e.critical ?? 22)}`,
+        fumble: `${Math.floor(Roll2d125e.fumble ?? 4)}`,
+      }
+    );
+
+    let defaultButton = "normal";
+
+    // Create the Dialog window and await submission of the form
+    return new Promise((resolve) => {
+      new Dialog(
+        {
+          title,
+          content,
+          buttons: {
+            normal: {
+              label: game.i18n.localize("DND5E.Normal"),
+              callback: (html) =>
+                resolve(
+                  this._onDialogSubmit(html, dnd5e.dice.D20Roll.ADV_MODE.NORMAL)
+                ),
+            },
+          },
+          default: defaultButton,
+          close: () => resolve(null),
+        },
+        options
+      ).render(true);
+    });
+  }
+
   _onDialogSubmit(html, advantageMode) {
     super._onDialogSubmit(html, advantageMode);
     const form = html[0].querySelector("form");
 
     // Append a disadvantage bonus term
-    if (form.disadvantage.value) {
-      const operator = new OperatorTerm({ operator: "-" });
-      const disadvantage = new NumericTerm({ number: form.disadvantage.value });
-      this.terms = this.terms.concat(operator, disadvantage);
+    if (form.critical.value) {
+      this.options.critical = form.critical.value;
     }
     // Append a disadvantage bonus term
-    if (form.advantage.value) {
-      const operator = new OperatorTerm({ operator: "+" });
-      const advantage = new NumericTerm({ number: form.advantage.value });
-      this.terms = this.terms.concat(operator, advantage);
+    if (form.fumble.value) {
+      this.options.fumble = form.fumble.value;
     }
     // Re-compile the underlying formula
     this._formula = this.constructor.getFormula(this.terms);

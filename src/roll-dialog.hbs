@@ -13,47 +13,14 @@
         </select>
     </div>
     {{/if}}
-    <div class="flexrow">
-        <fieldset>
-            <legend>Disadvantage:</legend>
-            <div>
-                <input type="radio" name="disadvantage" value="" checked />
-                <label for="huey">0</label>
-            </div>
-            <div>
-                <input type="radio" name="disadvantage" value="1" />
-                <label for="huey">-1</label>
-            </div>
-            <div>
-                <input type="radio" name="disadvantage" value="2" />
-                <label for="dewey">-2</label>
-            </div>
-            <div>
-                <input type="radio" name="disadvantage" value="3" />
-                <label for="louie">-3</label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Advantage:</legend>
-            <div>
-                <input type="radio" name="advantage" value="" checked />
-                <label for="huey">0</label>
-            </div>
-            <div>
-                <input type="radio" name="advantage" value="1" />
-                <label for="huey">+1</label>
-            </div>
-            <div>
-                <input type="radio" name="advantage" value="2" />
-                <label for="dewey">+2</label>
-            </div>
-            <div>
-                <input type="radio" name="advantage" value="3" />
-                <label for="louie">+3</label>
-            </div>
-
-        </fieldset>
-    </div>
+    <fieldset>
+        <legend>Critical Threshold:</legend>
+        <input type="number" step="1" name="critical" min="0" value="{{critical}}">
+    </fieldset>
+    <fieldset>
+        <legend>Fumble Threshold:</legend>
+        <input type="number" step="1" name="fumble" min="0" value="{{fumble}}">
+    </fieldset>
 
     <div class="form-group">
         <label>{{ localize "DND5E.RollSituationalBonus" }}</label>
